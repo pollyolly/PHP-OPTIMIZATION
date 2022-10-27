@@ -67,3 +67,13 @@ for ($index = 0, $index < $count; ++$index) {
    /* something happens here */
 }
 ```
+### PHP BUGS
+```
+/* WRONG */
+define ('PROJECT_ROOT', realpath(__DIR__ . '/../'));
+require_once realpath(__DIR__ . '/../../vendor/autoload.php');
+    
+/* CORRECT */
+define ('PROJECT_ROOT', dirname(__DIR__) . '/');
+require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
+```
