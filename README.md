@@ -70,6 +70,7 @@ for ($index = 0, $index < $count; ++$index) {
 ### PHP BUGS
 ```
 /* WRONG */
+//realpath() may cause bugs in other environment
 define ('PROJECT_ROOT', realpath(__DIR__ . '/../'));
 require_once realpath(__DIR__ . '/../../vendor/autoload.php');
     
