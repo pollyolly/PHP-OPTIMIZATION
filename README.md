@@ -171,3 +171,88 @@ echo "$drink is $color and $power makes it special.\n";
 list($drink, , $power) = $info;
 echo "$drink has $power.\n";
 ```
+#### array_search() REPLACED BY in_array()
+```
+/* BEFORE */
+    if (array_search($what, $where, true) === false) {
+        /* some logic here */
+    }
+    
+/* AFTER */
+    if (! in_array($what, $where, true)) {
+        /* some logic here */
+    }
+```
+#### strtr() REPLACED BY str_replace()
+```
+/* BEFORE */
+    $normalizedPath = strtr($string, '\\', '/');
+    
+/* AFTER */
+    $normalizedPath = str_replace('\\', '/', $string);
+```
+#### substr() REPLACED BY strpos()
+```
+/* BEFORE */
+    $containsString = substr($where, 0, strlen($what)) === $what;
+    
+/* AFTER */
+    $containsString = strpos($where, $what) === 0;
+```
+#### Redundant ELSE
+```
+/* BEFORE */
+    if ($value !== 'forbidden-value') {
+        return $value;
+    } else {
+        return null;
+    }
+/* AFTER */
+    if ($value !== 'forbidden-value') {
+        return $value;
+    }
+    return null;
+```
+#### Unncessary string case manipulation
+```
+/* BEFORE */
+    $matched = preg_match('/^prefix/i', strtolower($string));
+    
+/* AFTER */
+    $matched = preg_match('/^prefix/i', $string);
+```
+#### compact()
+```
+/* BEFORE */
+    $array = ['first' => $first, 'second' => $second];
+    
+/* AFTER */
+    $array = compact('first', 'second');
+```
+#### isset() can me merge
+```
+/* BEFORE */
+    $value = isset($first) && isset($second);
+    
+/* AFTER */
+    $value = isset($first, $second);
+```
+#### strlen() misused
+```
+/* BEFORE */
+    if (strlen($string))   {}
+    if (! strlen($string)) {}
+    
+/* AFTER */
+    if ($string !== '') {}
+    if ($string === '') {}
+```
+### ob_get_clean() can be used
+```
+/* BEFORE */
+    $content = ob_get_contents();
+    ob_end_clean();
+
+/* AFTER */
+    $content = ob_get_clean();
+```
