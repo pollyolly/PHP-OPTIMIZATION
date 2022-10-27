@@ -78,3 +78,17 @@ require_once realpath(__DIR__ . '/../../vendor/autoload.php');
 define ('PROJECT_ROOT', dirname(__DIR__) . '/');
 require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 ```
+### PHP ARCHITECTURE
+```
+//Class implements interfaces multiple times
+
+/* WRONG */
+interface Constract {}
+class ParentClass implements Contract {}
+class ChildClass extends ParentClass implements Contract {}
+
+/* CORRECT */
+interface Constract {}
+class ParentClass implements Contract {}
+class ChildClass extends ParentClass {}
+```
