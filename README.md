@@ -1,6 +1,6 @@
 ## PHP-OPTIMIZATION
 
-### PHP-ARRAY
+### PHP-ARRAY AND MEMORY OPTIMIZATION
 ```
 Note: Storing Arrays in a variable have default max limit of 2gb of strings. 
       Increase the PHP memory limit if necessary.
