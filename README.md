@@ -247,7 +247,7 @@ echo "$drink has $power.\n";
     if ($string !== '') {}
     if ($string === '') {}
 ```
-### ob_get_clean() can be used
+#### ob_get_clean() can be used
 ```
 /* BEFORE */
     $content = ob_get_contents();
