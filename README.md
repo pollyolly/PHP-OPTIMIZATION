@@ -1,6 +1,10 @@
 ## PHP-OPTIMIZATION
 
 ### PHP-ARRAY
+```
+Note: Storing Arrays in a variable have default max limit of 2gb of strings. 
+      Increase the PHP memory limit if necessary.
+```
 #### SplFixedArray (FIXED ARRAY SIZE)
 ```
 /* COMMON USE */
@@ -66,6 +70,13 @@ $count = count($array);
 for ($index = 0, $index < $count; ++$index) {
    /* something happens here */
 }
+```
+#### STORING ARRAY IN JSON
+```
+/* STORING DATA */
+$array[] = gzencode(json_encode($data));
+/* USING DATA */
+$myData = json_decode(gzdecode($array[0], true));
 ```
 ### PHP BUGS
 ```
