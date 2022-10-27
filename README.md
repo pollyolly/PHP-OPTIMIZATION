@@ -92,3 +92,82 @@ interface Constract {}
 class ParentClass implements Contract {}
 class ChildClass extends ParentClass {}
 ```
+### PHP SIMPLIFIED
+#### IF RETURN 
+```
+/* BEFORE */
+if ($variable === 'value') {
+   return true;
+}
+return false;
+    
+/* AFTER */
+return $variable === 'value';
+```
+#### SWITCH CASE 
+```
+/* BEFORE */
+switch ($variable) {
+   case 'value':
+   /* operations: 1st batch */
+   break;
+   default:
+   /* operations: 2nd batch */
+   break;
+}
+/* AFTER */
+if ($variable === 'value') {
+   /* operations: 1st batch */
+} else {
+   /* operations: 2nd batch */
+}
+```
+#### TERNARY OPERATOR
+```
+/* BEFORE */
+$variable = $number > 0 ? true : false;
+$variable = $number & $flag ? true : false;
+    
+/* AFTER */
+$variable = $number > 0;
+$variable = (bool) ($number & $flag);
+```
+#### UNSET
+```
+/* BEFORE */
+    unset($variable);
+    unset($argument);
+    
+/* AFTER */
+    unset($variable, $argument);
+```
+#### ONE TIME USE VARIABLE
+```
+/* BEFORE */
+    $object = new Clazz();
+    return $object->method();
+    
+/* AFTER */
+    return (new Clazz())->method();
+```
+#### USAGE OF LIST AS VARIABLE
+```
+/* BEFORE */
+    $array  = [ ... ];
+    $first  = $array[0];
+    $second = $array[1];
+    
+/* AFTER */
+    list($first, $second) = [ ... ];
+    
+//SAMPLE
+$info = array('coffee', 'brown', 'caffeine');
+
+// Listing all the variables
+list($drink, $color, $power) = $info;
+echo "$drink is $color and $power makes it special.\n";
+
+// Listing some of them
+list($drink, , $power) = $info;
+echo "$drink has $power.\n";
+```
