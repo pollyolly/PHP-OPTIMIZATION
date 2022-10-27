@@ -50,4 +50,20 @@ $array[$normalizer->normalize($value)] = $normalizer->normalize($value);
 $normalizedValue = $normalizer->normalize($value);
 $array[$normalizedValue] = $normalizedValue;
 ```
-### PHP 
+#### SLOW ARRAY FUNCTION CALL
+```
+/* WRONG */
+//This will call count() multiple times
+for ($index = 0; $index < count($array); ++$index) {
+   /* something happens here */
+}
+/* CORRECT */
+//Initialized count() once in a variable
+for ($index = 0, $count = count($array); $index < $count; ++$index) {
+   /* something happens here */
+}
+$count = count($array);
+for ($index = 0, $index < $count; ++$index) {
+   /* something happens here */
+}
+```
