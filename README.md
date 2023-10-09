@@ -1,12 +1,12 @@
 ## PHP-OPTIMIZATION
 
 ### PHP-ARRAY AND MEMORY OPTIMIZATION
-```
+```vm
 Note: Storing Arrays in a variable have default max limit of 2gb of strings. 
       Increase the PHP memory limit if necessary.
 ```
 #### SplFixedArray (FIXED ARRAY SIZE)
-```
+```php
 /* COMMON USE */
 $initialMemory = memory_get_usage();
 $units = 100000;
@@ -19,7 +19,7 @@ $memoryUsage = ceil(($finalMemory - $initialMemory)/ (1024*1024));
 // Memory Usage in MB
 echo $memoryUsage;
 ```
-```
+```php
 /* BETTER USE */
 //Using Fixed Array
 
@@ -39,7 +39,7 @@ $memoryUsage = ceil(($finalMemory - $initialMemory)/ (1024*1024));
 echo $memoryUsage;
 ```
 #### ARRAY REPETITIVE FUNCTION CALL
-```
+```php
 /* WRONG */
 $array[trim($value)] = trim($value);
 
@@ -55,7 +55,7 @@ $normalizedValue = $normalizer->normalize($value);
 $array[$normalizedValue] = $normalizedValue;
 ```
 #### SLOW ARRAY FUNCTION CALL
-```
+```php
 /* WRONG */
 //This will call count() multiple times
 for ($index = 0; $index < count($array); ++$index) {
@@ -72,14 +72,14 @@ for ($index = 0, $index < $count; ++$index) {
 }
 ```
 #### STORING ARRAY IN JSON
-```
+```php
 /* STORING DATA */
 $array[] = gzencode(json_encode($data));
 /* USING DATA */
 $myData = json_decode(gzdecode($array[0], true));
 ```
 ### PHP BUGS
-```
+```php
 /* WRONG */
 //realpath() may cause bugs in other environment
 define ('PROJECT_ROOT', realpath(__DIR__ . '/../'));
@@ -90,7 +90,7 @@ define ('PROJECT_ROOT', dirname(__DIR__) . '/');
 require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 ```
 ### PHP ARCHITECTURE
-```
+```php
 //Class implements interfaces multiple times
 
 /* WRONG */
@@ -105,7 +105,7 @@ class ChildClass extends ParentClass {}
 ```
 ### PHP SIMPLIFIED
 #### IF RETURN 
-```
+```php
 /* BEFORE */
 if ($variable === 'value') {
    return true;
@@ -116,7 +116,7 @@ return false;
 return $variable === 'value';
 ```
 #### SWITCH CASE 
-```
+```php
 /* BEFORE */
 switch ($variable) {
    case 'value':
@@ -134,7 +134,7 @@ if ($variable === 'value') {
 }
 ```
 #### TERNARY OPERATOR
-```
+```php
 /* BEFORE */
 $variable = $number > 0 ? true : false;
 $variable = $number & $flag ? true : false;
@@ -144,7 +144,7 @@ $variable = $number > 0;
 $variable = (bool) ($number & $flag);
 ```
 #### UNSET
-```
+```php
 /* BEFORE */
     unset($variable);
     unset($argument);
@@ -153,7 +153,7 @@ $variable = (bool) ($number & $flag);
     unset($variable, $argument);
 ```
 #### ONE TIME USE VARIABLE
-```
+```php
 /* BEFORE */
     $object = new Clazz();
     return $object->method();
@@ -162,7 +162,7 @@ $variable = (bool) ($number & $flag);
     return (new Clazz())->method();
 ```
 #### USAGE OF LIST AS VARIABLE
-```
+```php
 /* BEFORE */
     $array  = [ ... ];
     $first  = $array[0];
@@ -183,7 +183,7 @@ list($drink, , $power) = $info;
 echo "$drink has $power.\n";
 ```
 #### array_search() REPLACED BY in_array()
-```
+```php
 /* BEFORE */
     if (array_search($what, $where, true) === false) {
         /* some logic here */
@@ -195,7 +195,7 @@ echo "$drink has $power.\n";
     }
 ```
 #### strtr() REPLACED BY str_replace()
-```
+```php
 /* BEFORE */
     $normalizedPath = strtr($string, '\\', '/');
     
@@ -203,7 +203,7 @@ echo "$drink has $power.\n";
     $normalizedPath = str_replace('\\', '/', $string);
 ```
 #### substr() REPLACED BY strpos()
-```
+```php
 /* BEFORE */
     $containsString = substr($where, 0, strlen($what)) === $what;
     
@@ -211,7 +211,7 @@ echo "$drink has $power.\n";
     $containsString = strpos($where, $what) === 0;
 ```
 #### Redundant ELSE
-```
+```php
 /* BEFORE */
     if ($value !== 'forbidden-value') {
         return $value;
@@ -225,7 +225,7 @@ echo "$drink has $power.\n";
     return null;
 ```
 #### Unncessary string case manipulation
-```
+```php
 /* BEFORE */
     $matched = preg_match('/^prefix/i', strtolower($string));
     
@@ -233,7 +233,7 @@ echo "$drink has $power.\n";
     $matched = preg_match('/^prefix/i', $string);
 ```
 #### compact()
-```
+```php
 /* BEFORE */
     $array = ['first' => $first, 'second' => $second];
     
@@ -241,7 +241,7 @@ echo "$drink has $power.\n";
     $array = compact('first', 'second');
 ```
 #### isset() can me merge
-```
+```php
 /* BEFORE */
     $value = isset($first) && isset($second);
     
@@ -249,7 +249,7 @@ echo "$drink has $power.\n";
     $value = isset($first, $second);
 ```
 #### strlen() misused
-```
+```php
 /* BEFORE */
     if (strlen($string))   {}
     if (! strlen($string)) {}
@@ -259,7 +259,7 @@ echo "$drink has $power.\n";
     if ($string === '') {}
 ```
 #### ob_get_clean() can be used
-```
+```php
 /* BEFORE */
     $content = ob_get_contents();
     ob_end_clean();
